@@ -1,0 +1,128 @@
+{
+  "features": [
+    "lithology_gondite_index",
+    "ferrous_oxide_index",
+    "magnetic_anomaly_norm",
+    "structural_lineament_density",
+    "ndvi",
+    "slope_deg",
+    "soil_mn_anomaly",
+    "dist_to_belt_axis_km"
+  ],
+  "feature_labels": {
+    "lithology_gondite_index": "Gondite/Sausar lithology proximity",
+    "ferrous_oxide_index": "Satellite Fe-oxide band-ratio index",
+    "magnetic_anomaly_norm": "Aeromagnetic anomaly strength",
+    "structural_lineament_density": "Structural lineament (fault/shear) density",
+    "ndvi": "Vegetation index (NDVI)",
+    "slope_deg": "Terrain slope",
+    "soil_mn_anomaly": "Soil Mn/Fe geochemical anomaly",
+    "dist_to_belt_axis_km": "Distance to Sausar belt structural axis (km)"
+  },
+  "feature_importances": {
+    "lithology_gondite_index": 0.049407983889806883,
+    "ferrous_oxide_index": 0.2874113603165627,
+    "magnetic_anomaly_norm": 0.33243835742643163,
+    "structural_lineament_density": 0.024852644949382316,
+    "ndvi": 0.04091740820056501,
+    "slope_deg": 0.02907654683209776,
+    "soil_mn_anomaly": 0.13123999849803064,
+    "dist_to_belt_axis_km": 0.10465569988712296
+  },
+  "feature_stats": {
+    "lithology_gondite_index": {
+      "mean": 0.1096945740902675,
+      "std": 0.17814081341206053
+    },
+    "ferrous_oxide_index": {
+      "mean": 0.09307292248756331,
+      "std": 0.1311580962385953
+    },
+    "magnetic_anomaly_norm": {
+      "mean": 0.10012079661177942,
+      "std": 0.14372867747319357
+    },
+    "structural_lineament_density": {
+      "mean": 0.2188527743845819,
+      "std": 0.1717400756896004
+    },
+    "ndvi": {
+      "mean": 0.5411218438717647,
+      "std": 0.1421958856544352
+    },
+    "slope_deg": {
+      "mean": 4.17444122965686,
+      "std": 2.9899897301598655
+    },
+    "soil_mn_anomaly": {
+      "mean": 0.07000084882141602,
+      "std": 0.10425006695364304
+    },
+    "dist_to_belt_axis_km": {
+      "mean": 39.00342431665363,
+      "std": 25.86578743586599
+    }
+  },
+  "direction_signs": {
+    "lithology_gondite_index": 1.0,
+    "ferrous_oxide_index": 1.0,
+    "magnetic_anomaly_norm": 1.0,
+    "structural_lineament_density": 1.0,
+    "ndvi": -1.0,
+    "slope_deg": 1.0,
+    "soil_mn_anomaly": 1.0,
+    "dist_to_belt_axis_km": -1.0
+  },
+  "metrics": {
+    "test_roc_auc": 0.9975853929840744,
+    "test_average_precision": 0.9326861119596825,
+    "test_brier_score": 0.005746427725853029,
+    "cv_roc_auc_mean": 0.9960637053520485,
+    "cv_roc_auc_std": 0.003991027319924574,
+    "confusion_matrix": [
+      [
+        1271,
+        0
+      ],
+      [
+        7,
+        22
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.9945226917057903,
+        "recall": 1.0,
+        "f1-score": 0.9972538250294233,
+        "support": 1271.0
+      },
+      "1": {
+        "precision": 1.0,
+        "recall": 0.7586206896551724,
+        "f1-score": 0.8627450980392157,
+        "support": 29.0
+      },
+      "accuracy": 0.9946153846153846,
+      "macro avg": {
+        "precision": 0.9972613458528952,
+        "recall": 0.8793103448275862,
+        "f1-score": 0.9299994615343194,
+        "support": 1300.0
+      },
+      "weighted avg": {
+        "precision": 0.9946448778138919,
+        "recall": 0.9946153846153846,
+        "f1-score": 0.9942532457350264,
+        "support": 1300.0
+      }
+    },
+    "n_train": 3897,
+    "n_test": 1300
+  },
+  "zone_thresholds": {
+    "low_max": 0.35,
+    "medium_max": 0.65
+  },
+  "model_type": "RandomForestClassifier",
+  "trained_on": "generate_data.py::geospatial_grid.csv (presence/background labels, positive_buffer=3km, background_buffer=9km around documented Sausar-belt manganese occurrences)"
+}

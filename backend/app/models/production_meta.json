@@ -1,0 +1,186 @@
+{
+  "features": [
+    "rainfall_mm",
+    "avg_temperature_c",
+    "soil_moisture_pct",
+    "equipment_availability_pct",
+    "downtime_hours",
+    "labor_availability_pct",
+    "planned_target_tonnes",
+    "prev_month_efficiency",
+    "month",
+    "mine_type_encoded"
+  ],
+  "numeric_features": [
+    "rainfall_mm",
+    "avg_temperature_c",
+    "soil_moisture_pct",
+    "equipment_availability_pct",
+    "downtime_hours",
+    "labor_availability_pct",
+    "planned_target_tonnes",
+    "prev_month_efficiency",
+    "month"
+  ],
+  "categorical_features": [
+    "mine_type"
+  ],
+  "feature_labels": {
+    "rainfall_mm": "Monthly rainfall (mm)",
+    "avg_temperature_c": "Average temperature (\u00b0C)",
+    "soil_moisture_pct": "Soil moisture (%)",
+    "equipment_availability_pct": "Equipment availability (%)",
+    "downtime_hours": "Equipment downtime (hours)",
+    "labor_availability_pct": "Labour availability (%)",
+    "planned_target_tonnes": "Planned production target (t)",
+    "prev_month_efficiency": "Previous month efficiency ratio",
+    "month": "Calendar month",
+    "mine_type_encoded": "Mine type (opencast / underground)"
+  },
+  "mine_type_classes": [
+    "opencast",
+    "underground"
+  ],
+  "regression_feature_importances": {
+    "rainfall_mm": 0.23667855202925234,
+    "avg_temperature_c": 0.003546439145604684,
+    "soil_moisture_pct": 0.15524238661773934,
+    "equipment_availability_pct": 0.020554292920604678,
+    "downtime_hours": 0.003600439879927839,
+    "labor_availability_pct": 0.0028296190336194777,
+    "planned_target_tonnes": 0.545498009482901,
+    "prev_month_efficiency": 0.005471632423720358,
+    "month": 0.001314115974781244,
+    "mine_type_encoded": 0.02526451249184915
+  },
+  "classification_feature_importances": {
+    "rainfall_mm": 0.24220439436912777,
+    "avg_temperature_c": 0.10007516205551328,
+    "soil_moisture_pct": 0.2133924645768912,
+    "equipment_availability_pct": 0.19709810430487518,
+    "downtime_hours": 0.07594541674141853,
+    "labor_availability_pct": 0.04404283875531229,
+    "planned_target_tonnes": 0.03323441993348279,
+    "prev_month_efficiency": 0.056450862081867684,
+    "month": 0.0348964035898267,
+    "mine_type_encoded": 0.002659933591684625
+  },
+  "direction_signs": {
+    "rainfall_mm": 1.0,
+    "avg_temperature_c": 1.0,
+    "soil_moisture_pct": 1.0,
+    "equipment_availability_pct": -1.0,
+    "downtime_hours": 1.0,
+    "labor_availability_pct": -1.0,
+    "planned_target_tonnes": 1.0,
+    "prev_month_efficiency": -1.0,
+    "month": 1.0,
+    "mine_type_encoded": -1.0
+  },
+  "feature_stats": {
+    "rainfall_mm": {
+      "mean": 96.325,
+      "std": 115.53417345458081
+    },
+    "avg_temperature_c": {
+      "mean": 29.133333333333336,
+      "std": 6.376883427397012
+    },
+    "soil_moisture_pct": {
+      "mean": 27.35260416666667,
+      "std": 21.55299552875574
+    },
+    "equipment_availability_pct": {
+      "mean": 87.7,
+      "std": 6.219871887359277
+    },
+    "downtime_hours": {
+      "mean": 13.663541666666665,
+      "std": 8.92969186662497
+    },
+    "labor_availability_pct": {
+      "mean": 91.98229166666665,
+      "std": 4.992475906117246
+    },
+    "planned_target_tonnes": {
+      "mean": 6247.283333333333,
+      "std": 1868.286105156078
+    },
+    "prev_month_efficiency": {
+      "mean": 0.8458031632082795,
+      "std": 0.21762353176563798
+    },
+    "month": {
+      "mean": 6.5,
+      "std": 3.4610775198693817
+    },
+    "mine_type_encoded": {
+      "mean": 0.5,
+      "std": 0.5013071927732282
+    }
+  },
+  "metrics": {
+    "regression": {
+      "mae_tonnes": 266.717544751807,
+      "mape_pct": 10.024317345743212,
+      "r2": 0.9405080091826822,
+      "cv_r2_mean": 0.9548169467034144,
+      "cv_r2_std": 0.0037790081371153793,
+      "n_train": 144,
+      "n_test": 48
+    },
+    "classification": {
+      "roc_auc": 0.8892921960072595,
+      "cv_roc_auc_mean": 0.9396214736891995,
+      "cv_roc_auc_std": 0.03465461768488112,
+      "confusion_matrix": [
+        [
+          28,
+          1
+        ],
+        [
+          7,
+          12
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8,
+          "recall": 0.9655172413793104,
+          "f1-score": 0.875,
+          "support": 29.0
+        },
+        "1": {
+          "precision": 0.9230769230769231,
+          "recall": 0.631578947368421,
+          "f1-score": 0.75,
+          "support": 19.0
+        },
+        "accuracy": 0.8333333333333334,
+        "macro avg": {
+          "precision": 0.8615384615384616,
+          "recall": 0.7985480943738656,
+          "f1-score": 0.8125,
+          "support": 48.0
+        },
+        "weighted avg": {
+          "precision": 0.8487179487179488,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.8255208333333334,
+          "support": 48.0
+        }
+      },
+      "n_train": 144,
+      "n_test": 48
+    }
+  },
+  "shortfall_rule": "shortfall_event = 1 if actual_production < 90% of planned_target_tonnes for the month",
+  "risk_bands": {
+    "low_max": 0.3,
+    "medium_max": 0.6
+  },
+  "model_type": {
+    "regression": "RandomForestRegressor",
+    "classification": "RandomForestClassifier"
+  }
+}

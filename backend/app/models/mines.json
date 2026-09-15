@@ -1,0 +1,26 @@
+[
+  {
+    "mine_id": "MN-BAL-01",
+    "name": "Balaghat Mine",
+    "monthly_target_t": 9200,
+    "type": "underground"
+  },
+  {
+    "mine_id": "MN-UKW-02",
+    "name": "Ukwa Mine",
+    "monthly_target_t": 6400,
+    "type": "underground"
+  },
+  {
+    "mine_id": "MN-GUM-03",
+    "name": "Gumgaon Mine",
+    "monthly_target_t": 5100,
+    "type": "opencast"
+  },
+  {
+    "mine_id": "MN-CHK-04",
+    "name": "Chikla Mine",
+    "monthly_target_t": 4300,
+    "type": "opencast"
+  }
+]

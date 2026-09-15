@@ -1,0 +1,71 @@
+{
+  "area_name": "Nagpur\u2013Bhandara\u2013Balaghat Manganese Belt",
+  "bbox": [
+    20.75,
+    78.75,
+    22.05,
+    80.45
+  ],
+  "occurrences": [
+    {
+      "name": "Gumgaon Mine",
+      "lat": 21.02,
+      "lon": 79.05
+    },
+    {
+      "name": "Kandri Mine",
+      "lat": 21.055,
+      "lon": 79.145
+    },
+    {
+      "name": "Munsar Mine",
+      "lat": 21.145,
+      "lon": 79.205
+    },
+    {
+      "name": "Beldongri Mine",
+      "lat": 21.095,
+      "lon": 79.78
+    },
+    {
+      "name": "Chikla Mine",
+      "lat": 21.3,
+      "lon": 79.9
+    },
+    {
+      "name": "Dongri Buzurg Mine",
+      "lat": 21.25,
+      "lon": 79.955
+    },
+    {
+      "name": "Tirodi Mine",
+      "lat": 21.68,
+      "lon": 80.1
+    },
+    {
+      "name": "Ukwa Mine",
+      "lat": 21.755,
+      "lon": 80.15
+    },
+    {
+      "name": "Sitasaongi Mine",
+      "lat": 21.795,
+      "lon": 80.195
+    },
+    {
+      "name": "Balaghat Mine",
+      "lat": 21.81,
+      "lon": 80.185
+    },
+    {
+      "name": "Sitapatore Mine",
+      "lat": 21.77,
+      "lon": 80.23
+    },
+    {
+      "name": "Parseoni Occurrence",
+      "lat": 21.31,
+      "lon": 79.23
+    }
+  ]
+}
