@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MnVision AI — Manganese Mining Intelligence Platform</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ================= HEADER ================= -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">Mn</div>
+      <div class="brand-text">
+        <div class="brand-title">MnVision AI</div>
+        <div class="brand-sub">Manganese Mining Intelligence Platform &middot; Open Innovation Track</div>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <button class="nav-btn active" data-tab="prospectivity">Prospectivity Map</button>
+      <button class="nav-btn" data-tab="production">Production &amp; Risk</button>
+      <button class="nav-btn" data-tab="alerts">Alerts</button>
+      <button class="nav-btn" data-tab="reports">Reports</button>
+    </nav>
+
+    <div class="header-meta">
+      <div class="area-chip" id="areaChip">Loading area…</div>
+      <div class="status-chip" id="apiStatus"><span class="dot"></span> connecting…</div>
+    </div>
+  </header>
+
+  <!-- ================= PROSPECTIVITY TAB ================= -->
+  <main class="tab-panel active" id="tab-prospectivity">
+    <section class="panel-grid">
+      <div class="card map-card">
+        <div class="card-header">
+          <h2>Manganese Prospectivity Map</h2>
+          <p class="card-subtitle">Nagpur–Bhandara–Balaghat manganese belt &middot; exploration-prioritisation ranking (not direct ore detection) &middot; click any point for details, zoom in on clusters for precise selection</p>
+        </div>
+        <div id="map"></div>
+        <div class="map-legend">
+          <span class="legend-item"><i class="swatch zone-low"></i> Low</span>
+          <span class="legend-item"><i class="swatch zone-medium"></i> Medium</span>
+          <span class="legend-item"><i class="swatch zone-high"></i> High</span>
+          <span class="legend-item"><i class="swatch zone-mine"></i> Documented occurrence</span>
+        </div>
+      </div>
+
+      <div class="side-col">
+        <div class="card">
+          <div class="card-header"><h3>Zone Summary</h3></div>
+          <div class="stat-row" id="zoneSummary">
+            <div class="stat-block"><div class="stat-value" id="stat-high">–</div><div class="stat-label zone-high-text">High</div></div>
+            <div class="stat-block"><div class="stat-value" id="stat-medium">–</div><div class="stat-label zone-medium-text">Medium</div></div>
+            <div class="stat-block"><div class="stat-value" id="stat-low">–</div><div class="stat-label zone-low-text">Low</div></div>
+          </div>
+          <div class="mini-metric-row" id="modelMetrics">
+            <div class="mini-metric"><span class="mini-label">ROC-AUC</span><span class="mini-value" id="metric-auc">–</span></div>
+            <div class="mini-metric"><span class="mini-label">Avg Precision</span><span class="mini-value" id="metric-ap">–</span></div>
+          </div>
+        </div>
+
+        <div class="card" id="pointDetailCard">
+          <div class="card-header"><h3>Selected Location</h3></div>
+          <div id="pointDetailEmpty" class="empty-state">Click a point on the map to see its prospectivity score, confidence, and driving features.</div>
+          <div id="pointDetailContent" class="hidden">
+            <div class="score-hero">
+              <div class="score-value" id="pd-score">–</div>
+              <div class="score-meta">
+                <span class="zone-badge" id="pd-zone">–</span>
+                <span class="conf-text">Confidence: <b id="pd-confidence">–</b></span>
+              </div>
+            </div>
+            <div class="kv-line"><span>Coordinates</span><span id="pd-coords">–</span></div>
+            <div class="kv-line"><span>Nearest known occurrence</span><span id="pd-nearest">–</span></div>
+            <h4 class="explain-heading">Why this location is prospective</h4>
+            <div id="pd-explanation" class="explain-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card full-width">
+      <div class="card-header"><h3>Global Prospectivity Drivers (Model Feature Importance)</h3>
+      <p class="card-subtitle">Random Forest feature importances from the trained prospectivity classifier</p></div>
+      <div id="featureImportanceChart" class="bar-chart"></div>
+    </section>
+  </main>
+
+  <!-- ================= PRODUCTION TAB ================= -->
+  <main class="tab-panel" id="tab-production">
+    <section class="control-row">
+      <div class="field">
+        <label for="mineSelect">Select Mine</label>
+        <select id="mineSelect"></select>
+      </div>
+      <div class="risk-badge-wrap">
+        <span class="label-inline">Shortfall Risk</span>
+        <span class="risk-badge" id="riskBadge">–</span>
+      </div>
+    </section>
+
+    <section class="panel-grid">
+      <div class="card">
+        <div class="card-header"><h3>Production vs Target vs Predicted</h3></div>
+        <canvas id="productionChart" height="230"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Current Forecast</h3></div>
+        <div class="forecast-grid">
+          <div class="forecast-item"><span>Planned Target</span><b id="f-target">–</b></div>
+          <div class="forecast-item"><span>Predicted Production</span><b id="f-predicted">–</b></div>
+          <div class="forecast-item"><span>Predicted Shortfall</span><b id="f-shortfall">–</b></div>
+          <div class="forecast-item"><span>Shortfall Probability</span><b id="f-prob">–</b></div>
+          <div class="forecast-item"><span>Prediction Confidence</span><b id="f-conf">–</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-grid">
+      <div class="card">
+        <div class="card-header"><h3>Top Risk Drivers</h3></div>
+        <div id="riskDrivers" class="explain-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Recommended Actions</h3></div>
+        <ul id="recommendationList" class="rec-list"></ul>
+      </div>
+    </section>
+
+    <section class="card full-width">
+      <div class="card-header">
+        <h3>What-if Scenario Simulator</h3>
+        <p class="card-subtitle">Adjust operational/environmental conditions and re-run the trained model — results below update from live inference.</p>
+      </div>
+      <div class="whatif-grid">
+        <div class="slider-field">
+          <label>Rainfall (mm/month) <span id="wf-rainfall-val"></span></label>
+          <input type="range" id="wf-rainfall" min="0" max="400" step="5">
+        </div>
+        <div class="slider-field">
+          <label>Equipment Availability (%) <span id="wf-equip-val"></span></label>
+          <input type="range" id="wf-equip" min="40" max="100" step="1">
+        </div>
+        <div class="slider-field">
+          <label>Downtime (hours/month) <span id="wf-downtime-val"></span></label>
+          <input type="range" id="wf-downtime" min="0" max="220" step="5">
+        </div>
+        <div class="slider-field">
+          <label>Labour Availability (%) <span id="wf-labor-val"></span></label>
+          <input type="range" id="wf-labor" min="50" max="100" step="1">
+        </div>
+        <div class="slider-field">
+          <label>Soil Moisture (%) <span id="wf-soil-val"></span></label>
+          <input type="range" id="wf-soil" min="5" max="95" step="1">
+        </div>
+        <div class="slider-field">
+          <label>Planned Target (tonnes) <span id="wf-target-val"></span></label>
+          <input type="range" id="wf-target" min="1000" max="12000" step="100">
+        </div>
+      </div>
+      <div class="whatif-actions">
+        <button class="btn-primary" id="runWhatIf">Run What-if Scenario</button>
+        <button class="btn-secondary" id="resetWhatIf">Reset to Latest Conditions</button>
+      </div>
+      <div class="whatif-result" id="whatifResult"></div>
+    </section>
+  </main>
+
+  <!-- ================= ALERTS TAB ================= -->
+  <main class="tab-panel" id="tab-alerts">
+    <section class="card full-width">
+      <div class="card-header">
+        <h3>Live Alerts</h3>
+        <p class="card-subtitle">Generated directly from current model outputs — exploration opportunities and production risk warnings</p>
+      </div>
+      <div id="alertsList" class="alerts-list"></div>
+    </section>
+  </main>
+
+  <!-- ================= REPORTS TAB ================= -->
+  <main class="tab-panel" id="tab-reports">
+    <section class="card full-width">
+      <div class="card-header">
+        <h3>Decision Support Report</h3>
+        <p class="card-subtitle">Assembled live from current prospectivity and production model outputs</p>
+      </div>
+      <div class="whatif-actions">
+        <button class="btn-primary" id="generateReportBtn">Generate Report</button>
+        <button class="btn-secondary" id="downloadReportBtn" disabled>Download .txt</button>
+      </div>
+      <pre id="reportOutput" class="report-output">Click "Generate Report" to produce a live report from the current model state.</pre>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    MnVision AI Prototype &middot; SIH26009 &middot; Predictions are generated by trained ML models served from a live FastAPI backend &middot; Prospectivity results are exploration-prioritisation rankings and require field validation
+  </footer>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="vendor/chartjs/chart.umd.js"></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/prospectivity.js"></script>
+<script src="js/production.js"></script>
+<script src="js/alerts.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
